@@ -1,8 +1,8 @@
 {
   "name": "cli-components-io",
   "version": "0.1.0",
-  "description": "",
-  "main": "build/index.js",
+  "description": "Terminal social skills",
+  "main": "dist/index.js",
   "scripts": {
     "test": "gulp test"
   },
