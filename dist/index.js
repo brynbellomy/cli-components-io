@@ -45,6 +45,18 @@ var Logger = (function () {
         process.stderr.write([chalk.red(err), err.stack || ''].join('\n'));
         process.exit(1);
     };
+    /**
+        Colorizes and formats a simple "header" kind of thing.  You can surround text in asterisks to apply a highlight.  For example: "Installing *someprogram* version *1.0*"
+     */
+    Logger.prototype.header = function (text) {
+        var matches = text.match(/\*[^\*]+\*/g);
+        matches.forEach(function (match) {
+            var extracted = match.replace(/(^\*)|(\*$)/g, '');
+            text = text.replace(match, '' + chalk.white.bold(extracted));
+        });
+        var stars = '' + chalk.yellow('***');
+        return [stars, text, stars].join(' ');
+    };
     Logger.prototype.indent = function () {
         this.folderDepth++;
     };
@@ -83,3 +95,11 @@ function dieError(err) {
     logger().dieError(err);
 }
 exports.dieError = dieError;
+/**
+    Colorizes and formats a simple "header" kind of thing.  You can surround text in asterisks to apply a highlight.  For example: "Installing *someprogram* version *1.0*"
+ */
+function header(text) {
+    return logger().header(text);
+}
+exports.header = header;
+//# sourceMappingURL=index.js.map
